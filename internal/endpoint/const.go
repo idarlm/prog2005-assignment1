@@ -1,4 +1,4 @@
-package handler
+package endpoint
 
 // Server properties
 const DEFAULT_PORT = 8080
