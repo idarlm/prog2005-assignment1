@@ -12,8 +12,10 @@ func main() {
 	endpoints.ListenDiag()
 
 	//start server
+	fmt.Println("Starting server on port:", endpoints.DEFAULT_PORT)
+
 	err := http.ListenAndServe(":"+endpoints.DEFAULT_PORT, nil)
 	if err != nil {
-		fmt.Println("Server running and listening on port:", endpoints.DEFAULT_PORT)
+		fmt.Println("Error when starting server:", err.Error())
 	}
 }
