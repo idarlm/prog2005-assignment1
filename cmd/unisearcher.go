@@ -1,7 +1,7 @@
 package main
 
 import (
-	endpoint "assignment1/endpoint"
+	"assignment1/endpoint"
 	"fmt"
 )
 
