@@ -14,7 +14,7 @@ func HandleCoffee() {
 
 func HandleDiag() {
 	path := ROOT_PATH_V1 + DIAG_PATH
-	http.HandleFunc(path, endpoint.DiagHandler)
+	http.HandleFunc(path, endpoint.HandleGET(endpoint.DiagHandler))
 	printEndpoint(path)
 }
 
