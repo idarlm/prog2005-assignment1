@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	//set all endpoints to listen to
+	//set all endpoints
 	endpoints.HandleDiag()
 	endpoints.HandleCoffee()
 
