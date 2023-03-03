@@ -1,11 +1,14 @@
 package main
 
 import (
-	"assignment1/endpoint"
+	"assignment1/endpoints"
 	"fmt"
+	"net/http"
 )
 
 func main() {
 	fmt.Println("Hello world!")
-	fmt.Println("Default port:", endpoint.DEFAULT_PORT)
+	endpoints.ListenCoffee()
+
+	http.ListenAndServe(":"+endpoints.DEFAULT_PORT, nil)
 }
