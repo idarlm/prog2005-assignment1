@@ -7,13 +7,15 @@ import (
 )
 
 func ListenCoffee() {
-	http.HandleFunc(ROOT_PATH_V1+COFFEE_PATH, endpoint.HandlerCoffee)
-	printListener(ROOT_PATH_V1 + COFFEE_PATH)
+	path := COFFEE_PATH
+	http.HandleFunc(path, endpoint.HandlerCoffee)
+	printListener(path)
 }
 
 func ListenDiag() {
-	http.HandleFunc(ROOT_PATH_V1+DIAG_PATH, endpoint.HandlerDiag)
-	printListener(ROOT_PATH_V1 + DIAG_PATH)
+	path := ROOT_PATH_V1 + DIAG_PATH
+	http.HandleFunc(path, endpoint.HandlerDiag)
+	printListener(path)
 }
 
 func printListener(path string) {
