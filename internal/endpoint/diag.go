@@ -5,6 +5,6 @@ import (
 	"net/http"
 )
 
-func HandlerDiag(w http.ResponseWriter, r *http.Request) {
+func DiagHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("diag") // TODO: everything
 }

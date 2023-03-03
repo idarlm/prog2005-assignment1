@@ -6,15 +6,15 @@ import (
 	"net/http"
 )
 
-func ListenCoffee() {
+func HandleCoffee() {
 	path := COFFEE_PATH
-	http.HandleFunc(path, endpoint.HandlerCoffee)
+	http.HandleFunc(path, endpoint.CoffeeHandler)
 	printEndpoint(path)
 }
 
-func ListenDiag() {
+func HandleDiag() {
 	path := ROOT_PATH_V1 + DIAG_PATH
-	http.HandleFunc(path, endpoint.HandlerDiag)
+	http.HandleFunc(path, endpoint.DiagHandler)
 	printEndpoint(path)
 }
 
