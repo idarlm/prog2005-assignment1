@@ -1,7 +1,7 @@
 package endpoints
 
 import (
-	"assignment1/endpoints/endpoint"
+	endpoint "assignment1/internal/endpoint"
 	"fmt"
 	"net/http"
 )
@@ -11,6 +11,11 @@ func ListenCoffee() {
 	printListener(ROOT_PATH_V1 + COFFEE_PATH)
 }
 
+func ListenDiag() {
+	http.HandleFunc(ROOT_PATH_V1+DIAG_PATH, endpoint.HandlerDiag)
+	printListener(ROOT_PATH_V1 + DIAG_PATH)
+}
+
 func printListener(path string) {
-	fmt.Println("Listening on endpoint:", path)
+	fmt.Println("Set endpoint:", path)
 }
