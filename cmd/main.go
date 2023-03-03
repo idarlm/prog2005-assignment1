@@ -1,11 +1,11 @@
 package main
 
 import (
-	server "assignment1/internal/server"
+	handler "assignment1/internal/handler"
 	"fmt"
 )
 
 func main() {
 	fmt.Println("Hello world!")
-	fmt.Println("Default port:", server.DEFAULT_PORT)
+	fmt.Println("Default port:", handler.DEFAULT_PORT)
 }
