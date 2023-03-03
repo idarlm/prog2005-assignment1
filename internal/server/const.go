@@ -1,4 +1,4 @@
-package main
+package server
 
 // Server properties
 const DEFAULT_PORT = 8080
