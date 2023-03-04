@@ -1,0 +1,98 @@
+[
+    {
+        "state-province": null,
+        "domains": [
+            "nmh.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.nmh.no/"
+        ],
+        "name": "Norwegian State Academy of Music",
+        "alpha_two_code": "NO"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "bi.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.bi.no/"
+        ],
+        "name": "Norwegian School of Management BI",
+        "alpha_two_code": "NO"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "nhh.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.nhh.no/"
+        ],
+        "name": "Norwegian School of Economics and Business Administration",
+        "alpha_two_code": "NO"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "nla.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.nla.no/"
+        ],
+        "name": "Norwegian Teacher Academy for Studies in Religion and Education",
+        "alpha_two_code": "NO"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "nih.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.nih.no/"
+        ],
+        "name": "Norwegian University of Sport and Physical Education",
+        "alpha_two_code": "NO"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ntnu.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.ntnu.no/"
+        ],
+        "name": "Norwegian University of Science and Technology",
+        "alpha_two_code": "NO"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "umb.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.umb.no/"
+        ],
+        "name": "Norwegian University of Life Sciences",
+        "alpha_two_code": "NO"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "veths.no"
+        ],
+        "country": "Norway",
+        "web_pages": [
+            "http://www.veths.no/"
+        ],
+        "name": "Norwegian College of Veterinary Medicine",
+        "alpha_two_code": "NO"
+    }
+]
