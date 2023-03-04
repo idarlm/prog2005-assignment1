@@ -6,18 +6,15 @@ import (
 	"net/http"
 )
 
+func HandlePath(path string, handler func(w http.ResponseWriter, r *http.Request)) {
+	http.HandleFunc(path, handler)
+	fmt.Println("Set endpoint:" + path)
+}
+
 func HandleCoffee() {
-	path := COFFEE_PATH
-	http.HandleFunc(path, endpoint.CoffeeHandler)
-	printEndpoint(path)
+	HandlePath(COFFEE_PATH, endpoint.HandleGET(endpoint.CoffeeHandler))
 }
 
 func HandleDiag() {
-	path := ROOT_PATH_V1 + DIAG_PATH
-	http.HandleFunc(path, endpoint.HandleGET(endpoint.DiagHandler))
-	printEndpoint(path)
-}
-
-func printEndpoint(path string) {
-	fmt.Println("Active endpoint:", path)
+	HandlePath(ROOT_PATH_V1+DIAG_PATH, endpoint.HandleGET(endpoint.DiagHandler))
 }
