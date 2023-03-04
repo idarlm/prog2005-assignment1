@@ -2,6 +2,7 @@ package endpoints
 
 import (
 	"assignment1/internal/endpoint"
+	"assignment1/internal/stub"
 	"fmt"
 	"net/http"
 )
@@ -25,7 +26,11 @@ func HandleGET(handler func(w http.ResponseWriter, r *http.Request)) func(w http
 	}
 }
 
-func SetEndpoints() {
+func SetAllEndpoints() {
 	HandlePath(COFFEE_PATH, endpoint.CoffeeHandler)
 	HandlePath(ROOT_PATH_V1+DIAG_PATH, HandleGET(endpoint.DiagHandler))
+}
+
+func SetStubEndpoints() {
+	HandlePath("/stub/hipo", HandleGET(stub.HipoHandler))
 }

@@ -7,10 +7,11 @@ import (
 )
 
 func main() {
-	endpoints.SetEndpoints()
+	endpoints.SetAllEndpoints()
+	endpoints.SetStubEndpoints()
 
 	//start server
-	fmt.Println("Starting server on port:", endpoints.DEFAULT_PORT)
+	fmt.Println("Listening on port:", endpoints.DEFAULT_PORT)
 
 	err := http.ListenAndServe(":"+endpoints.DEFAULT_PORT, nil)
 	if err != nil {
