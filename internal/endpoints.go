@@ -27,7 +27,7 @@ func HandleGET(handler func(w http.ResponseWriter, r *http.Request)) func(w http
 
 // set handler for coffee
 func HandleCoffee() {
-	HandlePath(COFFEE_PATH, HandleGET(endpoint.CoffeeHandler))
+	HandlePath(COFFEE_PATH, endpoint.CoffeeHandler)
 }
 
 // set handler for
