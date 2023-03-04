@@ -29,13 +29,3 @@ func SetEndpoints() {
 	HandlePath(COFFEE_PATH, endpoint.CoffeeHandler)
 	HandlePath(ROOT_PATH_V1+DIAG_PATH, HandleGET(endpoint.DiagHandler))
 }
-
-// set handler for coffee
-func HandleCoffee() {
-	HandlePath(COFFEE_PATH, endpoint.CoffeeHandler)
-}
-
-// set handler for
-func HandleDiag() {
-	HandlePath(ROOT_PATH_V1+DIAG_PATH, HandleGET(endpoint.DiagHandler))
-}

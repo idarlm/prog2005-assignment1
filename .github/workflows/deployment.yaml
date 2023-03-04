@@ -18,7 +18,7 @@ jobs:
           # for the first push, An owner token is needed.
         run:  |
           echo "Pushing to NTNU GitLab-Work-Space:"
-          git fetch --unshallow "https://github.com/idarlm/prog2005-assignment1"
+          git fetch "https://github.com/idarlm/prog2005-assignment1"
           git config user.name "Idar Løkset Mykløy"
           git config user.email "idarmy@stud.ntnu.no"
           git remote set-url origin "https://oauth2:$TOKEN@git.gvk.idi.ntnu.no/course/prog2005/prog2005-2023-workspace/idarmy/assignment-1.git"

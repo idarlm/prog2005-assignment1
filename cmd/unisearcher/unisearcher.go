@@ -7,9 +7,7 @@ import (
 )
 
 func main() {
-	//set all endpoints
-	endpoints.HandleDiag()
-	endpoints.HandleCoffee()
+	endpoints.SetEndpoints()
 
 	//start server
 	fmt.Println("Starting server on port:", endpoints.DEFAULT_PORT)
