@@ -14,7 +14,7 @@ jobs:
 
       - name: Push to NTNU GitLab Workspace
         env:
-          TOKEN: ${{ secrets.GITLAB_ACCESS_TOKEN }}
+          TOKEN: ${{ secrets.GITLAB_TOKEN }}
           # for the first push, An owner token is needed.
         run:  |
           echo "Pushing to NTNU GitLab-Work-Space:"
