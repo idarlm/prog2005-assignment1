@@ -5,6 +5,7 @@ import (
 	"assignment1/internal/stub"
 	"fmt"
 	"net/http"
+	"sync"
 )
 
 // Assign handler func to path
@@ -26,11 +27,23 @@ func HandleGET(handler func(w http.ResponseWriter, r *http.Request)) func(w http
 	}
 }
 
-func SetAllEndpoints() {
+func SetApiEndpoints() {
 	HandlePath(COFFEE_PATH, endpoint.CoffeeHandler)
 	HandlePath(ROOT_PATH_V1+DIAG_PATH, HandleGET(endpoint.DiagHandler))
 }
 
 func SetStubEndpoints() {
 	HandlePath("/stub/hipo", HandleGET(stub.HipoHandler))
+}
+
+func StartServer(wg *sync.WaitGroup) {
+	wg.Add(1)
+
+	SetApiEndpoints()
+	SetStubEndpoints()
+
+	err := http.ListenAndServe(":"+DEFAULT_PORT, nil)
+	if err != nil {
+		fmt.Println("Error when starting server:", err.Error())
+	}
 }
