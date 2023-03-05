@@ -2,12 +2,23 @@ package main
 
 import (
 	endpoints "assignment1/internal"
-	"sync"
+	"fmt"
+	"net/http"
+	"os"
 )
 
 func main() {
-	wg := &sync.WaitGroup{}
-	go endpoints.StartServer(wg)
+	endpoints.SetApiEndpoints()
+	endpoints.SetDebugEndpoints()
 
-	wg.Wait()
+	port := os.Getenv("$PORT")
+	if port == "" {
+		port = endpoints.DEFAULT_PORT
+	}
+
+	fmt.Println("Listening on port:", port)
+	err := http.ListenAndServe(":"+port, nil)
+	if err != nil {
+		fmt.Println("Error when starting server:", err.Error())
+	}
 }
