@@ -33,6 +33,7 @@ func SetApiEndpoints() {
 
 func SetDebugEndpoints() {
 	SetHandle("/stub/hipo", HandleGET(stub.HipoHandler))
+	SetHandle("/stub/country", HandleGET(stub.CountryHandler))
+	SetHandle("/name/test", HandleGET(stub.CountryHandler))
 	SetHandle("/test/unis", HandleGET(endpoint.TestUniHandler))
-
 }

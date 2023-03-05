@@ -1,19 +1,25 @@
 package endpoint
 
 import (
-	"assignment1/pkg/universities"
+	"assignment1/pkg/countries"
 	"fmt"
 	"net/http"
 )
 
 func TestUniHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Searching for Norwegian universities with 'technology' as name component...")
-	uc := universities.NewUniClient()
-	uc.AddQuery("name", "technology")
-	uc.AddQuery("country", "norway")
-	uc.Search()
+	fmt.Println("Parsing country info...")
+	cc := countries.NewClient()
+	err := cc.SearchByName("norway")
+	if err != nil {
+		fmt.Println("test: error when searching by name:", err)
+		return
+	}
 
-	content := uc.Content()
-	fmt.Println("Number of entries:", len(content))
-	fmt.Println("Retrieved data: ", content)
+	res := cc.Basic()[0]
+	fmt.Printf("\nName: %s\nNative name(s): %v\nCapital: %v\nBorders: %v\nOpenStreetMaps: %s\n",
+		res.Name.Common,
+		res.Name.NativeNames,
+		res.Capital,
+		res.Borders,
+		res.Maps.OpenStreetMaps)
 }
