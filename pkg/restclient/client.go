@@ -25,6 +25,12 @@ func (client RestClient) AddQuery(key string, value string) {
 	client.request.URL.RawQuery = query.Encode()
 }
 
+func (client RestClient) SetQuery(key string, value string) {
+	query := client.request.URL.Query()
+	query.Set(key, value)
+	client.request.URL.RawQuery = query.Encode()
+}
+
 func (client RestClient) GetContent(output any) {
 	// instantiate client
 	c := &http.Client{}
