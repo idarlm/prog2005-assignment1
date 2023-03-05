@@ -2,6 +2,7 @@ package restclient
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -19,22 +20,24 @@ func NewRestClient(url string) RestClient {
 	return RestClient{r}
 }
 
-func (client RestClient) AddQuery(key string, value string) {
+func (client *RestClient) AddQuery(key string, value string) {
 	query := client.request.URL.Query()
 	query.Add(key, value)
 	client.request.URL.RawQuery = query.Encode()
 }
 
-func (client RestClient) SetQuery(key string, value string) {
+func (client *RestClient) SetQuery(key string, value string) {
 	query := client.request.URL.Query()
 	query.Set(key, value)
 	client.request.URL.RawQuery = query.Encode()
 }
 
-func (client RestClient) GetContent(output any) {
+func (client *RestClient) GetContent(output any) {
 	// instantiate client
 	c := &http.Client{}
 	defer c.CloseIdleConnections()
+
+	fmt.Println("Performing query: ", client.request.URL.String())
 
 	// issue request
 	res, err := c.Do(client.request)
