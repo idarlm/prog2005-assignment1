@@ -39,7 +39,7 @@ func (client *RestClient) ClearQuery() {
 	}
 }
 
-func (client *RestClient) GetContent(output any) {
+func (client *RestClient) GetContent(output any) error {
 	// instantiate client
 	c := &http.Client{}
 	defer c.CloseIdleConnections()
@@ -49,12 +49,19 @@ func (client *RestClient) GetContent(output any) {
 	// issue request
 	res, err := c.Do(client.request)
 	if err != nil {
-		log.Fatal("Error in response:", err.Error())
+		return err
+	}
+	defer res.Body.Close()
+
+	// fail if not ok
+	if res.StatusCode != http.StatusOK {
+		output = nil
+		return fmt.Errorf("restclient: did not recieve status code 200. output is set to nil")
 	}
 
+	// decode json data
 	decoder := json.NewDecoder(res.Body)
-	e := decoder.Decode(output)
-	if e != nil {
-		log.Fatal(e)
-	}
+	err = decoder.Decode(output)
+
+	return err
 }
