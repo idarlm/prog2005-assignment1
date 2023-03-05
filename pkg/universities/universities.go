@@ -4,8 +4,10 @@ import "assignment1/pkg/restclient"
 
 const API_URL = "http://universities.hipolabs.com"
 const API_SEARCH_URL = API_URL + "/search"
+const STUB_URL = "http://localhost:8080/stub/hipo"
 
-type University struct {
+// default data structure for api response
+type UniversityInfo struct {
 	StateProvince string   `json:"state-province"`
 	Domains       []string `json:"domains"`
 	Country       string   `json:"country"`
@@ -14,9 +16,37 @@ type University struct {
 	AlphaTwoCode  string   `json:"alpha_two_code"`
 }
 
-func SearchByName(name string) (result []University) {
-	client := restclient.NewRestClient(API_SEARCH_URL)
-	client.AddQuery("name", name)
-	client.GetContent(&result)
-	return
+type UniClient struct {
+	client  restclient.RestClient
+	content []UniversityInfo
+}
+
+func NewUniClient() UniClient {
+	return UniClient{restclient.NewRestClient(API_SEARCH_URL), nil}
+}
+
+// return a copy of content
+func (uc *UniClient) Content() []UniversityInfo {
+	return uc.content
+}
+
+// append key/value pair to query
+func (uc *UniClient) AddQuery(key, value string) {
+	uc.client.AddQuery(key, value)
+}
+
+// set query to key/value pair
+func (uc *UniClient) SetQuery(key, value string) {
+	uc.client.SetQuery(key, value)
+}
+
+// perform request and parse response data
+func (uc *UniClient) Search() {
+	uc.client.GetContent(&uc.content)
+}
+
+// set name query and perform request
+func (uc *UniClient) SearchByName(name string) {
+	uc.client.SetQuery("name", name)
+	uc.Search()
 }
