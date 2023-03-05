@@ -32,6 +32,13 @@ func (client *RestClient) SetQuery(key string, value string) {
 	client.request.URL.RawQuery = query.Encode()
 }
 
+func (client *RestClient) ClearQuery() {
+	query := client.request.URL.Query()
+	for k := range query {
+		delete(query, k)
+	}
+}
+
 func (client *RestClient) GetContent(output any) {
 	// instantiate client
 	c := &http.Client{}
