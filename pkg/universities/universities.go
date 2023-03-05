@@ -1,6 +1,8 @@
 package universities
 
-import "assignment1/pkg/restclient"
+import (
+	"assignment1/pkg/restclient"
+)
 
 const API_URL = "http://universities.hipolabs.com"
 const API_SEARCH_URL = API_URL + "/search"
@@ -41,17 +43,23 @@ func (uc *UniClient) SetQuery(key, value string) {
 }
 
 // perform request and parse response data
-func (uc *UniClient) Search() {
-	uc.client.GetContent(&uc.content)
+func (uc *UniClient) Search() error {
+	err := uc.client.GetContent(&uc.content)
+	if err != nil {
+		uc.content = nil
+	}
+	return err
 }
 
 // set name query and perform request
-func (uc *UniClient) SearchByName(value string) {
+func (uc *UniClient) SearchByName(value string) error {
 	uc.client.SetQuery("name", value)
-	uc.Search()
+	err := uc.Search()
+	return err
 }
 
-func (uc *UniClient) SearchByCountry(value string) {
+func (uc *UniClient) SearchByCountry(value string) error {
 	uc.client.SetQuery("country", value)
-	uc.Search()
+	err := uc.Search()
+	return err
 }
