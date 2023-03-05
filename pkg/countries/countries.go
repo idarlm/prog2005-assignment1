@@ -10,7 +10,7 @@ type CountryClient struct {
 }
 
 func NewClient() CountryClient {
-	return CountryClient{restclient.NewRestClient(API_URL), nil}
+	return CountryClient{restclient.NewRestClient(API_BASE_V3_1), nil}
 }
 
 func (cc *CountryClient) Basic() []BasicInfo {
@@ -36,7 +36,16 @@ func (cc *CountryClient) SearchBasic() error {
 }
 
 func (cc *CountryClient) SearchByName(value string) error {
-	cc.client = restclient.NewRestClient(API_BASE_V3_1 + ENDPOINT_NAME + value)
+	cc.client.SetPath(ENDPOINT_NAME + value)
+	err := cc.SearchBasic()
+	return err
+}
+
+func (cc *CountryClient) SearchByAlpha(value ...string) error {
+	cc.client.SetPath(ENDPOINT_ALPHA)
+	for _, v := range value {
+		cc.client.AddQuery("codes", v)
+	}
 	err := cc.SearchBasic()
 	return err
 }
