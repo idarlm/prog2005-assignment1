@@ -20,6 +20,10 @@ func NewRestClient(url string) RestClient {
 	return RestClient{r}
 }
 
+func (client *RestClient) SetPath(value string) {
+	client.request.URL = client.request.URL.JoinPath(value)
+}
+
 func (client *RestClient) AddQuery(key string, value string) {
 	query := client.request.URL.Query()
 	query.Add(key, value)
@@ -56,7 +60,7 @@ func (client *RestClient) GetContent(output any) error {
 	// fail if not ok
 	if res.StatusCode != http.StatusOK {
 		output = nil
-		return fmt.Errorf("restclient: did not recieve status code 200. output is set to nil")
+		return fmt.Errorf("restclient: expected status code 200 OK but got %s instead. output set to nil", res.Status)
 	}
 
 	// decode json data
