@@ -2,58 +2,36 @@ package restclient
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
 
-func Test() {
-	url := "http://localhost:8080/stub/hipo"
-
-	// create request
-	r, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		fmt.Println("Error when creating request:", err.Error())
-		return
-	}
-
-	// set content type
-	r.Header.Add("content-type", "application/json")
-
-	// instantiate the client
-	client := &http.Client{}
-	defer client.CloseIdleConnections()
-
-	// issue request
-	res, err := client.Do(r)
-	if err != nil {
-		fmt.Println("Error in response:", err.Error())
-		return
-	}
-
-	fmt.Println("Status:", res.Status)
-}
-
 type RestClient struct {
-	URL string
+	request *http.Request
 }
 
-func (client RestClient) GetContent(output any) {
-	// create request
-	r, err := http.NewRequest(http.MethodGet, client.URL, nil)
+func NewRestClient(url string) RestClient {
+	r, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		log.Fatal("Error in request:", err.Error())
 	}
 
-	// set content type
-	r.Header.Add("content-type", "application/json")
+	return RestClient{r}
+}
 
+func (client RestClient) AddQuery(key string, value string) {
+	query := client.request.URL.Query()
+	query.Add(key, value)
+	client.request.URL.RawQuery = query.Encode()
+}
+
+func (client RestClient) GetContent(output any) {
 	// instantiate client
 	c := &http.Client{}
 	defer c.CloseIdleConnections()
 
 	// issue request
-	res, err := c.Do(r)
+	res, err := c.Do(client.request)
 	if err != nil {
 		log.Fatal("Error in response:", err.Error())
 	}
