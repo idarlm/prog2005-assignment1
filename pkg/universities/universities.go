@@ -8,12 +8,12 @@ const STUB_URL = "http://localhost:8080/stub/hipo"
 
 // default data structure for api response
 type UniversityInfo struct {
+	AlphaTwoCode  string   `json:"alpha_two_code"`
 	StateProvince string   `json:"state-province"`
 	Domains       []string `json:"domains"`
 	Country       string   `json:"country"`
 	WebPages      []string `json:"web_pages"`
 	Name          string   `json:"name"`
-	AlphaTwoCode  string   `json:"alpha_two_code"`
 }
 
 type UniClient struct {
@@ -46,7 +46,12 @@ func (uc *UniClient) Search() {
 }
 
 // set name query and perform request
-func (uc *UniClient) SearchByName(name string) {
-	uc.client.SetQuery("name", name)
+func (uc *UniClient) SearchByName(value string) {
+	uc.client.SetQuery("name", value)
+	uc.Search()
+}
+
+func (uc *UniClient) SearchByCountry(value string) {
+	uc.client.SetQuery("country", value)
 	uc.Search()
 }
