@@ -24,12 +24,22 @@ type UniClient struct {
 }
 
 func NewUniClient() UniClient {
-	return UniClient{restclient.NewRestClient(API_SEARCH_URL), nil}
+	return UniClient{restclient.NewRestClient("http://localhost:8080/stub/hipo"), nil}
 }
 
 // return a copy of content
 func (uc *UniClient) Content() []UniversityInfo {
 	return uc.content
+}
+
+func (uc *UniClient) Prod() string {
+	rc := restclient.NewRestClient(API_URL)
+	status, err := rc.Prod()
+	if err != nil {
+		status = "Service unavailable"
+	}
+
+	return status
 }
 
 // append key/value pair to query

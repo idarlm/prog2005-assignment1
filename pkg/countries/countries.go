@@ -10,7 +10,7 @@ type CountryClient struct {
 }
 
 func NewClient() CountryClient {
-	return CountryClient{restclient.NewRestClient(API_BASE_V3_1), nil}
+	return CountryClient{restclient.NewRestClient("http://localhost:8080/"), nil}
 }
 
 func (cc *CountryClient) Basic() []BasicInfo {
@@ -19,6 +19,18 @@ func (cc *CountryClient) Basic() []BasicInfo {
 
 func (cc *CountryClient) Client() restclient.RestClient {
 	return cc.client
+}
+
+// Prod for status
+func (cc *CountryClient) Prod() string {
+	rc := restclient.NewRestClient(API_URL)
+	status, err := rc.Prod()
+
+	if err != nil {
+		return "Service unavailable"
+	}
+
+	return status
 }
 
 func (cc *CountryClient) SearchBasic() error {
