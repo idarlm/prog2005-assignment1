@@ -10,7 +10,7 @@ type CountryClient struct {
 }
 
 func NewClient() CountryClient {
-	return CountryClient{restclient.NewRestClient(API_BASE_V3_1), nil}
+	return CountryClient{restclient.NewRestClient("http://localhost:8080/"), nil}
 }
 
 func (cc *CountryClient) Basic() []BasicInfo {

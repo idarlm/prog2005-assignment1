@@ -34,7 +34,7 @@ func SetApiEndpoints() {
 
 func SetDebugEndpoints() {
 	SetHandle("/stub/hipo", HandleGET(stub.HipoHandler))
-	SetHandle("/stub/country", HandleGET(stub.CountryHandler))
-	SetHandle("/name/test", HandleGET(stub.CountryHandler))
-	SetHandle("/test/unis", HandleGET(endpoint.TestUniHandler))
+	SetHandle("/name", HandleGET(stub.CountryHandler))
+	SetHandle("/alpha", HandleGET(stub.CountryHandler))
+	SetHandle("/test", HandleGET(endpoint.TestUniHandler))
 }

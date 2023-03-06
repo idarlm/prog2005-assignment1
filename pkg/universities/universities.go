@@ -24,7 +24,7 @@ type UniClient struct {
 }
 
 func NewUniClient() UniClient {
-	return UniClient{restclient.NewRestClient(API_SEARCH_URL), nil}
+	return UniClient{restclient.NewRestClient("http://localhost:8080/stub/hipo"), nil}
 }
 
 // return a copy of content
