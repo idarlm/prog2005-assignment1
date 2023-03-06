@@ -7,10 +7,13 @@ import (
 	"assignment1/pkg/universities"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
 func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
+	common.ContentTypeJson(&w)
+
 	// check if bad request
 	path := strings.Split(r.URL.EscapedPath(), "/")
 
@@ -32,6 +35,19 @@ func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
 	// format data
 	country = common.FormatString(country)
 	name = common.FormatString(name)
+
+	// check for limit
+	query := r.URL.Query()
+	limit := query.Has("limit")
+	var limitAmt int
+
+	if limit {
+		var e error
+		limitAmt, e = strconv.Atoi(query.Get("limit"))
+		if e != nil {
+			limit = false
+		}
+	}
 
 	fmt.Printf("\nneighbourunis: handling request for %s, %s\n", country, name)
 
@@ -63,14 +79,19 @@ func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// return specified limit
+	slice := comp[:]
+	if limit && limitAmt < len(slice) {
+		slice = comp[:limitAmt]
+	}
+
 	// array to json
-	err = common.EncodeJson(&w, comp)
+	err = common.EncodeJson(&w, slice)
 	if err != nil {
 		fmt.Println("neighbour: error on EncodeJson: ", err.Error())
 		common.ErrorInternalError(&w)
 		return
 	}
-	common.ContentTypeJson(&w)
 
 	fmt.Println("Request complete.")
 }
