@@ -29,6 +29,7 @@ func HandleGET(handler func(w http.ResponseWriter, r *http.Request)) func(w http
 func SetApiEndpoints() {
 	SetHandle(COFFEE_PATH, endpoint.CoffeeHandler)
 	SetHandle(ROOT_PATH_V1+DIAG_PATH, HandleGET(endpoint.DiagHandler))
+	SetHandle(ROOT_PATH_V1+UNIINFO_PATH, HandleGET(endpoint.UniinfoHandler))
 }
 
 func SetDebugEndpoints() {

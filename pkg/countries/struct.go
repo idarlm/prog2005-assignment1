@@ -7,6 +7,7 @@ type BasicInfo struct {
 	Languages map[string]string `json:"languages"`
 	Borders   []string          `json:"borders"`
 	Maps      MapsLinks         `json:"maps"`
+	Cca2      string            `json:"cca2"`
 }
 
 // data type containing name fields
