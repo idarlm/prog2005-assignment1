@@ -2,7 +2,6 @@ package universities
 
 import (
 	"assignment1/pkg/restclient"
-	"fmt"
 )
 
 const API_URL = "http://universities.hipolabs.com"
@@ -37,7 +36,7 @@ func (uc *UniClient) Prod() string {
 	rc := restclient.NewRestClient(API_URL)
 	status, err := rc.Prod()
 	if err != nil {
-		status = fmt.Sprintf("Service unavailable: %s", err.Error())
+		status = "Service unavailable."
 	}
 
 	return status

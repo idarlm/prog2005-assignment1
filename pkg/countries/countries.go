@@ -2,7 +2,6 @@ package countries
 
 import (
 	"assignment1/pkg/restclient"
-	"fmt"
 )
 
 type CountryClient struct {
@@ -28,7 +27,7 @@ func (cc *CountryClient) Prod() string {
 	status, err := rc.Prod()
 
 	if err != nil {
-		return fmt.Sprintf("Service unavailable: %s", err.Error())
+		return "Service unavailable."
 	}
 
 	return status
