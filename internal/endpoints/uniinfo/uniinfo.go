@@ -1,4 +1,4 @@
-package endpoint
+package uniinfo
 
 import (
 	"assignment1/pkg/countries"

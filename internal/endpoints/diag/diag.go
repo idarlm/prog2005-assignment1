@@ -1,4 +1,4 @@
-package endpoint
+package diag
 
 import (
 	"assignment1/pkg/countries"

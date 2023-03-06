@@ -1,7 +1,7 @@
 package main
 
 import (
-	endpoints "assignment1/internal"
+	"assignment1/internal/endpoints"
 	"fmt"
 	"net/http"
 	"os"
