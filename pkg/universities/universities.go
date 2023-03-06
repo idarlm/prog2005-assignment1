@@ -36,7 +36,7 @@ func (uc *UniClient) Prod() string {
 	rc := restclient.NewRestClient(API_URL)
 	status, err := rc.Prod()
 	if err != nil {
-		status = "Service unavailable."
+		status = "Service unavailable"
 	}
 
 	return status

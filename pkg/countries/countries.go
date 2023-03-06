@@ -27,7 +27,7 @@ func (cc *CountryClient) Prod() string {
 	status, err := rc.Prod()
 
 	if err != nil {
-		return "Service unavailable."
+		return "Service unavailable"
 	}
 
 	return status
