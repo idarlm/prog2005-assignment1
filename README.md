@@ -6,15 +6,15 @@ Hosted publicly on render: https://prog2005-assignment1-qgfb.onrender.com
 
 ## Endpoints
 The api has three main endpoints:
-/unisearcher/v1/uniinfo/{name_component}/
-/unisearcher/v1/neighbourunis/{country}/{name_component}/
-/unisearcher/v1/diag/
+* `/unisearcher/v1/uniinfo/{name_component}/`
+* `/unisearcher/v1/neighbourunis/{country}/{name_component}/`
+* `/unisearcher/v1/diag/`
 
 ### uniinfo endpoint
 Returns a list of all universities with a given name component.
 
-Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/uniinfo/norwegian%20university%20of
-
+* Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/uniinfo/norwegian%20university%20of
+* Body:
 ```json
 [
     {
@@ -38,8 +38,8 @@ Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/uniinfo/n
 ### neighbourunis endpoint
 Returns a list of universities with a given {name_component} in neighbouring countries to {country}
 
-Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/neighbourunis/norway/tech
-
+* Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/neighbourunis/norway/tech
+* Body:
 ```json
 [
     {
@@ -75,8 +75,8 @@ Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/neighbour
 ### diag endpoint
 Provides the status of this service and the remote services it depends on.
 
-Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/diag/
-
+* Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/diag/
+* Body:
 ```json
 {
     "universitiesapi": "200 OK",
