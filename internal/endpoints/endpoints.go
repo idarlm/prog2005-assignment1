@@ -1,8 +1,10 @@
 package endpoints
 
 import (
-	"assignment1/internal/endpoint"
-	"assignment1/internal/stub"
+	"assignment1/internal/endpoints/diag"
+	"assignment1/internal/endpoints/endpoint"
+	"assignment1/internal/endpoints/stub"
+	"assignment1/internal/endpoints/uniinfo"
 	"fmt"
 	"net/http"
 	"time"
@@ -29,10 +31,10 @@ func HandleGET(handler func(w http.ResponseWriter, r *http.Request)) func(w http
 
 func SetApiEndpoints() {
 	SetHandle(COFFEE_PATH, endpoint.CoffeeHandler)
-	SetHandle(ROOT_PATH_V1+DIAG_PATH, HandleGET(endpoint.DiagHandler))
-	SetHandle(ROOT_PATH_V1+UNIINFO_PATH, HandleGET(endpoint.UniinfoHandler))
+	SetHandle(ROOT_PATH_V1+DIAG_PATH, HandleGET(diag.DiagHandler))
+	SetHandle(ROOT_PATH_V1+UNIINFO_PATH, HandleGET(uniinfo.UniinfoHandler))
 
-	endpoint.Timestamp = time.Now() // set timestamp for diag endpoint
+	diag.Timestamp = time.Now() // set timestamp for diag endpoint
 }
 
 func SetDebugEndpoints() {

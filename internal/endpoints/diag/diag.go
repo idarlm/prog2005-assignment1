@@ -1,11 +1,10 @@
-package endpoint
+package diag
 
 import (
+	"assignment1/internal/endpoints/common"
 	"assignment1/pkg/countries"
 	"assignment1/pkg/universities"
-	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 )
@@ -34,12 +33,11 @@ func DiagHandler(w http.ResponseWriter, r *http.Request) {
 	res.Uptime = fmt.Sprintf("%ds", int(time.Since(Timestamp).Seconds()))
 
 	//encode result
-	encoder := json.NewEncoder(w)
-	err := encoder.Encode(res)
+	err := common.EncodeJson(&w, res)
 	if err != nil {
-		log.Println("DiagHandler: error on encode json:", err.Error())
-		http.Error(w, "Internal error.", http.StatusInternalServerError)
+		fmt.Println("diag: error when encoding json:", err.Error())
+		return
 	}
 
-	w.Header().Add("content-type", "application/json")
+	common.ContentTypeJson(&w)
 }
