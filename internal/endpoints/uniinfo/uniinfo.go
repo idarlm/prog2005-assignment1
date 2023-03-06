@@ -40,7 +40,7 @@ func UniinfoHandler(w http.ResponseWriter, r *http.Request) {
 
 	// format name before performing search
 	name = common.FormatString(name)
-	fmt.Println("\nuniinfo: handling request for", name)
+	fmt.Println("uniinfo: handling request for", name)
 
 	// search for university name
 	info, err := search(name, &w)

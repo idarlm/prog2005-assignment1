@@ -49,7 +49,7 @@ func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	fmt.Printf("\nneighbourunis: handling request for %s, %s\n", country, name)
+	fmt.Printf("neighbourunis: handling request for %s, %s\n", country, name)
 
 	// query for country and return array of neighbours
 	codes, err := getNeighbours(&w, country)

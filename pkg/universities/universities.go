@@ -4,20 +4,6 @@ import (
 	"assignment1/pkg/restclient"
 )
 
-const API_URL = "http://universities.hipolabs.com"
-const API_SEARCH_URL = API_URL + "/search"
-const STUB_URL = "http://localhost:8080/stub/hipo"
-
-// default data structure for api response
-type UniversityInfo struct {
-	AlphaTwoCode  string   `json:"alpha_two_code"`
-	StateProvince string   `json:"state-province"`
-	Domains       []string `json:"domains"`
-	Country       string   `json:"country"`
-	WebPages      []string `json:"web_pages"`
-	Name          string   `json:"name"`
-}
-
 type UniClient struct {
 	client  restclient.RestClient
 	content []UniversityInfo
@@ -32,6 +18,7 @@ func (uc *UniClient) Content() []UniversityInfo {
 	return uc.content
 }
 
+// prod universities api
 func (uc *UniClient) Prod() string {
 	rc := restclient.NewRestClient(API_URL)
 	status, err := rc.Prod()

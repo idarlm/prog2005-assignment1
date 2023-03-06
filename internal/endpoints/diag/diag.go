@@ -19,6 +19,8 @@ type DiagResp struct {
 }
 
 func DiagHandler(w http.ResponseWriter, r *http.Request) {
+	common.ContentTypeJson(&w)
+
 	res := DiagResp{}
 
 	// prod universities api
@@ -38,6 +40,4 @@ func DiagHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("diag: error when encoding json:", err.Error())
 		return
 	}
-
-	common.ContentTypeJson(&w)
 }
