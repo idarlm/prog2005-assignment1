@@ -9,7 +9,7 @@ import (
 
 func main() {
 	endpoints.SetApiEndpoints()
-	endpoints.SetDebugEndpoints()
+	//endpoints.SetDebugEndpoints()
 
 	port := os.Getenv("PORT")
 	if port == "" {
