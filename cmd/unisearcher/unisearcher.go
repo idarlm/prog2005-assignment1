@@ -11,7 +11,7 @@ func main() {
 	endpoints.SetApiEndpoints()
 	endpoints.SetDebugEndpoints()
 
-	port := os.Getenv("$PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = endpoints.DEFAULT_PORT
 	}
