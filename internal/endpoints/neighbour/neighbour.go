@@ -69,6 +69,7 @@ func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
 	unis, err := getUniversities(&w, name, countries)
 	if err != nil {
 		fmt.Println("neighbour: error on getUniversities: ", err.Error())
+		return
 	}
 
 	// compile all data into array of UniinfoDefault
@@ -116,6 +117,10 @@ func getNeighbours(w *http.ResponseWriter, countryName string) ([]string, error)
 	}
 
 	codes := countries[0].Borders
+	if len(codes) == 0 {
+		common.ErrorNotFound(w)
+		return nil, fmt.Errorf("getNeighbours: no results")
+	}
 
 	// return neighbourlist
 	return codes, err
