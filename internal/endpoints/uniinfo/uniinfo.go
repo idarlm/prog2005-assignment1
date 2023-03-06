@@ -1,9 +1,9 @@
 package uniinfo
 
 import (
+	"assignment1/internal/endpoints/common"
 	"assignment1/pkg/countries"
 	"assignment1/pkg/universities"
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
@@ -20,13 +20,13 @@ type UniinfoDefault struct {
 }
 
 func UniinfoHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("content-type", "application/json")
+	common.ContentTypeJson(&w)
 
 	path := strings.Split(r.URL.EscapedPath(), "/")
 
 	// check if path is formatted correctly
 	if len(path) != 5 && !(len(path) == 6 && path[5] == "") {
-		http.Error(w, "Bad request.", http.StatusBadRequest)
+		common.ErrorBadRequest(&w)
 		return
 	}
 
@@ -34,14 +34,13 @@ func UniinfoHandler(w http.ResponseWriter, r *http.Request) {
 
 	//check if name is empty
 	if name == "" {
-		http.Error(w, "Bad request.", http.StatusBadRequest)
+		common.ErrorBadRequest(&w)
 		return
 	}
 
 	// format name before performing search
-	name = strings.ReplaceAll(name, "%20", " ")
-	name = strings.ReplaceAll(name, "+", " ")
-	fmt.Println("Uniinfo: handling request for", name)
+	name = common.FormatString(name)
+	fmt.Println("uniinfo: handling request for", name)
 
 	// search for university name
 	info, err := search(name, &w)
@@ -51,12 +50,9 @@ func UniinfoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// encode data to json format
-	encoder := json.NewEncoder(w)
-	err = encoder.Encode(info)
+	err = common.EncodeJson(&w, info)
 	if err != nil {
-		fmt.Println("Error in UniinfoHandler:", err.Error())
-		http.Error(w, "Internal error.", http.StatusInternalServerError)
-		return
+		fmt.Println("error in uniinfo:", err.Error())
 	}
 }
 
@@ -66,14 +62,14 @@ func search(name string, w *http.ResponseWriter) (resp []UniinfoDefault, err err
 	uc := universities.NewUniClient()
 	err = uc.SearchByName(name)
 	if err != nil {
-		http.Error(*w, "Internal error.", http.StatusInternalServerError)
+		common.ErrorInternalError(w)
 		return nil, err
 	}
 	unis := uc.Content()
 
 	// check if content was found
 	if len(unis) == 0 {
-		http.Error(*w, "Not found.", http.StatusNotFound)
+		common.ErrorNotFound(w)
 		return nil, fmt.Errorf("uniinfo: No results")
 	}
 
@@ -87,7 +83,7 @@ func search(name string, w *http.ResponseWriter) (resp []UniinfoDefault, err err
 	cc := countries.NewClient()
 	err = cc.SearchByAlpha(codes)
 	if err != nil {
-		http.Error(*w, "Internal error.", http.StatusInternalServerError)
+		common.ErrorInternalError(w)
 		return nil, err
 	}
 	counts := cc.Basic()
@@ -102,7 +98,7 @@ func search(name string, w *http.ResponseWriter) (resp []UniinfoDefault, err err
 
 		c, e := findCountry(resp[i].Isocode, counts)
 		if e != nil {
-			http.Error(*w, "Internal error.", http.StatusInternalServerError)
+			common.ErrorInternalError(w)
 			return nil, e
 		}
 
