@@ -27,6 +27,7 @@ func (cc *CountryClient) SearchBasic() error {
 	cc.client.AddQuery("fields", "borders")
 	cc.client.AddQuery("fields", "maps")
 	cc.client.AddQuery("fields", "languages")
+	cc.client.AddQuery("fields", "cca2")
 
 	err := cc.client.GetContent(&cc.basic)
 	if err != nil {
@@ -41,7 +42,7 @@ func (cc *CountryClient) SearchByName(value string) error {
 	return err
 }
 
-func (cc *CountryClient) SearchByAlpha(value ...string) error {
+func (cc *CountryClient) SearchByAlpha(value []string) error {
 	cc.client.SetPath(ENDPOINT_ALPHA)
 	for _, v := range value {
 		cc.client.AddQuery("codes", v)
