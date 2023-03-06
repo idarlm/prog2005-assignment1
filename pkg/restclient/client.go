@@ -43,7 +43,7 @@ func (client *RestClient) ClearQuery() {
 	}
 }
 
-func (client *RestClient) GetContent(output any) error {
+func (client *RestClient) Get() (*http.Response, error) {
 	// instantiate client
 	c := &http.Client{}
 	defer c.CloseIdleConnections()
@@ -52,6 +52,12 @@ func (client *RestClient) GetContent(output any) error {
 
 	// issue request
 	res, err := c.Do(client.request)
+	return res, err
+}
+
+func (client *RestClient) GetContent(output any) error {
+	// issue request
+	res, err := client.Get()
 	if err != nil {
 		return err
 	}
