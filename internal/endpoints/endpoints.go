@@ -3,6 +3,7 @@ package endpoints
 import (
 	"assignment1/internal/endpoints/diag"
 	"assignment1/internal/endpoints/endpoint"
+	"assignment1/internal/endpoints/neighbour"
 	"assignment1/internal/endpoints/stub"
 	"assignment1/internal/endpoints/uniinfo"
 	"fmt"
@@ -33,13 +34,14 @@ func SetApiEndpoints() {
 	SetHandle(COFFEE_PATH, endpoint.CoffeeHandler)
 	SetHandle(ROOT_PATH_V1+DIAG_PATH, HandleGET(diag.DiagHandler))
 	SetHandle(ROOT_PATH_V1+UNIINFO_PATH, HandleGET(uniinfo.UniinfoHandler))
+	SetHandle(ROOT_PATH_V1+NEIGHBOURUNI_PATH, HandleGET(neighbour.NeighbourHandler))
 
 	diag.Timestamp = time.Now() // set timestamp for diag endpoint
 }
 
 func SetDebugEndpoints() {
 	SetHandle("/stub/hipo", HandleGET(stub.HipoHandler))
-	SetHandle("/name", HandleGET(stub.CountryHandler))
+	SetHandle("/name/Norway", HandleGET(stub.CountryHandler))
 	SetHandle("/alpha", HandleGET(stub.CountryHandler))
 	SetHandle("/test", HandleGET(endpoint.TestUniHandler))
 }
