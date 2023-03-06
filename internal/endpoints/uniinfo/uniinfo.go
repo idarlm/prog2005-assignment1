@@ -89,14 +89,24 @@ func search(name string, w *http.ResponseWriter) (resp []UniinfoDefault, err err
 	counts := cc.Basic()
 
 	// compile response data
-	resp = make([]UniinfoDefault, len(unis))
+	resp, err = CompileData(w, unis, counts)
+	if err != nil {
+		common.ErrorInternalError(w)
+		return nil, err
+	}
+
+	return resp, err
+}
+
+func CompileData(w *http.ResponseWriter, unis []universities.UniversityInfo, couns []countries.BasicInfo) ([]UniinfoDefault, error) {
+	resp := make([]UniinfoDefault, len(unis))
 	for i := range resp {
 		resp[i].Name = unis[i].Name
 		resp[i].Country = unis[i].Country
 		resp[i].Isocode = unis[i].AlphaTwoCode
 		resp[i].Webpages = unis[i].WebPages
 
-		c, e := findCountry(resp[i].Isocode, counts)
+		c, e := FindCountry(resp[i].Isocode, couns)
 		if e != nil {
 			common.ErrorInternalError(w)
 			return nil, e
@@ -105,11 +115,10 @@ func search(name string, w *http.ResponseWriter) (resp []UniinfoDefault, err err
 		resp[i].Languages = c.Languages
 		resp[i].Map = c.Maps.OpenStreetMaps
 	}
-
-	return resp, err
+	return resp, nil
 }
 
-func findCountry(code string, collection []countries.BasicInfo) (countries.BasicInfo, error) {
+func FindCountry(code string, collection []countries.BasicInfo) (countries.BasicInfo, error) {
 	for _, c := range collection {
 		found := c.Cca2 == code
 		if found {

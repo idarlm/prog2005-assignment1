@@ -73,3 +73,9 @@ func (uc *UniClient) SearchByCountry(value string) error {
 	err := uc.Search()
 	return err
 }
+
+func (uc *UniClient) SearchNameCountry(name, country string) error {
+	uc.client.SetQuery("name", name)
+	err := uc.SearchByCountry(country)
+	return err
+}
