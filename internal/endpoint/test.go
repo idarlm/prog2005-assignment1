@@ -9,7 +9,7 @@ import (
 func TestUniHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Parsing country info...")
 	cc := countries.NewClient()
-	err := cc.SearchByAlpha("no", "swe", "fi")
+	err := cc.SearchByName("norw")
 	if err != nil {
 		fmt.Println("test: error when searching by name:", err)
 		return

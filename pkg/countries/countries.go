@@ -41,7 +41,7 @@ func (cc *CountryClient) SearchByName(value string) error {
 	return err
 }
 
-func (cc *CountryClient) SearchByAlpha(value ...string) error {
+func (cc *CountryClient) SearchByAlpha(value []string) error {
 	cc.client.SetPath(ENDPOINT_ALPHA)
 	for _, v := range value {
 		cc.client.AddQuery("codes", v)
