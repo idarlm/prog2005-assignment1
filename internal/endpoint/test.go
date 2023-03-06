@@ -16,9 +16,10 @@ func TestUniHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, res := range cc.Basic() {
-		fmt.Printf("\nName: %s\nNative name(s): %v\nCapital: %v\nBorders: %v\nOpenStreetMaps: %s\n",
+		fmt.Printf("\nName: %s\nNative name(s): %v\nLanguages: %v\nCapital: %v\nBorders: %v\nOpenStreetMaps: %s\n",
 			res.Name.Common,
 			res.Name.NativeNames,
+			res.Languages,
 			res.Capital,
 			res.Borders,
 			res.Maps.OpenStreetMaps)
