@@ -5,6 +5,7 @@ import (
 	"assignment1/internal/stub"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 // Assign handler func to path
@@ -30,6 +31,8 @@ func SetApiEndpoints() {
 	SetHandle(COFFEE_PATH, endpoint.CoffeeHandler)
 	SetHandle(ROOT_PATH_V1+DIAG_PATH, HandleGET(endpoint.DiagHandler))
 	SetHandle(ROOT_PATH_V1+UNIINFO_PATH, HandleGET(endpoint.UniinfoHandler))
+
+	endpoint.Timestamp = time.Now() // set timestamp for diag endpoint
 }
 
 func SetDebugEndpoints() {
