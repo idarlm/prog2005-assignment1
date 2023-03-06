@@ -16,7 +16,13 @@ func ParseFile(name string) []byte {
 }
 
 func HipoHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("content-type", "application.json")
+	w.Header().Add("content-type", "application/json")
 	content := ParseFile("./internal/stub/hipostub.json")
+	fmt.Fprint(w, string(content))
+}
+
+func CountryHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("content-type", "application/json")
+	content := ParseFile("./internal/stub/countrystub.json")
 	fmt.Fprint(w, string(content))
 }
