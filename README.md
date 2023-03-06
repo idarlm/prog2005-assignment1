@@ -7,7 +7,7 @@ Hosted publicly on render: https://prog2005-assignment1-qgfb.onrender.com
 ## Endpoints
 The api has three main endpoints:
 * `/unisearcher/v1/uniinfo/{name_component}/`
-* `/unisearcher/v1/neighbourunis/{country}/{name_component}/`
+* `/unisearcher/v1/neighbourunis/{country}/{name_component}[?limit=n]`
 * `/unisearcher/v1/diag/`
 
 ### uniinfo endpoint
@@ -36,7 +36,8 @@ Returns a list of all universities with a given name component.
 ```
 
 ### neighbourunis endpoint
-Returns a list of universities with a given {name_component} in neighbouring countries to {country}
+Returns a list of universities with a given {name_component} in neighbouring countries to {country}.
+The maximum number of items to retrieve can be specified with the limit query.
 
 * Example: https://prog2005-assignment1-qgfb.onrender.com/unisearcher/v1/neighbourunis/norway/tech
 * Body:
