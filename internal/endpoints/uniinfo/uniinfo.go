@@ -24,6 +24,7 @@ func UniinfoHandler(w http.ResponseWriter, r *http.Request) {
 
 	path := strings.Split(r.URL.EscapedPath(), "/")
 
+	// /base/ver/uniinfo/{name}
 	// check if path is formatted correctly
 	if len(path) != 5 && !(len(path) == 6 && path[5] == "") {
 		common.ErrorBadRequest(&w)
@@ -40,7 +41,7 @@ func UniinfoHandler(w http.ResponseWriter, r *http.Request) {
 
 	// format name before performing search
 	name = common.FormatString(name)
-	fmt.Println("uniinfo: handling request for", name)
+	fmt.Println("\nuniinfo: handling request for", name)
 
 	// search for university name
 	info, err := search(name, &w)
@@ -54,6 +55,8 @@ func UniinfoHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("error in uniinfo:", err.Error())
 	}
+
+	fmt.Println("Request complete.")
 }
 
 // Search for universities and compose response info

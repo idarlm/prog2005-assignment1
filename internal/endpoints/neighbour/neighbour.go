@@ -7,14 +7,35 @@ import (
 	"assignment1/pkg/universities"
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
-	// check if request brokey
-	country := "Norway"
-	nameComponent := "tech"
+	// check if bad request
+	path := strings.Split(r.URL.EscapedPath(), "/")
 
-	// query for name and return array of neighbours
+	// /base/version/neighbourunis/{country}/{name}
+	if len(path) != 6 && !(len(path) == 7 && path[6] == "") {
+		common.ErrorBadRequest(&w)
+		return
+	}
+
+	country := path[4]
+	name := path[5]
+
+	// check if values are empty
+	if country == "" || name == "" {
+		common.ErrorBadRequest(&w)
+		return
+	}
+
+	// format data
+	country = common.FormatString(country)
+	name = common.FormatString(name)
+
+	fmt.Printf("\nneighbourunis: handling request for %s, %s\n", country, name)
+
+	// query for country and return array of neighbours
 	codes, err := getNeighbours(&w, country)
 	if err != nil {
 		fmt.Println("neighbour: error on getNeighbours: ", err.Error())
@@ -28,8 +49,8 @@ func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// get all universities with uniComponent
-	unis, err := getUniversities(&w, nameComponent, countries)
+	// get all universities with name
+	unis, err := getUniversities(&w, name, countries)
 	if err != nil {
 		fmt.Println("neighbour: error on getUniversities: ", err.Error())
 	}
@@ -42,7 +63,7 @@ func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// array to json
+	// encode array to json
 	err = common.EncodeJson(&w, comp)
 	if err != nil {
 		fmt.Println("neighbour: error on EncodeJson: ", err.Error())
@@ -50,6 +71,8 @@ func NeighbourHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	common.ContentTypeJson(&w)
+
+	fmt.Println("Request complete.")
 }
 
 func getNeighbours(w *http.ResponseWriter, countryName string) ([]string, error) {
