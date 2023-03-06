@@ -20,6 +20,20 @@ func NewRestClient(url string) RestClient {
 	return RestClient{r}
 }
 
+// Sends request and returns status code
+// Request should be easy for external to handle
+func (client *RestClient) Prod() (string, error) {
+	status := ""
+
+	res, err := client.Get()
+	if err == nil {
+		status = res.Status
+		res.Body.Close()
+	}
+
+	return status, err
+}
+
 func (client *RestClient) SetPath(value string) {
 	client.request.URL = client.request.URL.JoinPath(value)
 }

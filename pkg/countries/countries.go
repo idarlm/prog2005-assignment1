@@ -2,6 +2,7 @@ package countries
 
 import (
 	"assignment1/pkg/restclient"
+	"fmt"
 )
 
 type CountryClient struct {
@@ -19,6 +20,18 @@ func (cc *CountryClient) Basic() []BasicInfo {
 
 func (cc *CountryClient) Client() restclient.RestClient {
 	return cc.client
+}
+
+// Prod for status
+func (cc *CountryClient) Prod() string {
+	rc := restclient.NewRestClient(API_URL)
+	status, err := rc.Prod()
+
+	if err != nil {
+		return fmt.Sprintf("Service unavailable: %s", err.Error())
+	}
+
+	return status
 }
 
 func (cc *CountryClient) SearchBasic() error {
