@@ -24,7 +24,7 @@ type UniClient struct {
 }
 
 func NewUniClient() UniClient {
-	return UniClient{restclient.NewRestClient("http://localhost:8080/stub/hipo"), nil}
+	return UniClient{restclient.NewRestClient(API_SEARCH_URL), nil}
 }
 
 // return a copy of content
@@ -71,5 +71,11 @@ func (uc *UniClient) SearchByName(value string) error {
 func (uc *UniClient) SearchByCountry(value string) error {
 	uc.client.SetQuery("country", value)
 	err := uc.Search()
+	return err
+}
+
+func (uc *UniClient) SearchNameCountry(name, country string) error {
+	uc.client.SetQuery("name", name)
+	err := uc.SearchByCountry(country)
 	return err
 }
