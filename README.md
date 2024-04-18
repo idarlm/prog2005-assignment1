@@ -2,8 +2,6 @@
 A rest API written in Go that finds basic info about universities, and the countries they are based in.
 This service uses the [hipolabs university domain API](https://github.com/Hipo/university-domains-list/) and [Rest countries API](https://gitlab.com/restcountries/restcountries).
 
-Hosted publicly on render: https://prog2005-assignment1-qgfb.onrender.com
-
 ## Endpoints
 The api has three main endpoints:
 * `/unisearcher/v1/uniinfo/{name_component}/`
